@@ -62,6 +62,8 @@ class ATMController:
             return 0, "ERROR: select an account first!"
         elif amount <= 0:
             return 0, "ERROR: enter a valid amount to withdraw!"
+        elif amount > self.accounts[self.selected_acct]:
+            return 0, "ERROR: withdraw amount exceeds account balance!"
         else:
             val, message = self.bank.update_balance(self.card_number, self.selected_acct, -amount)
             if val:

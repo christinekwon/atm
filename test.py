@@ -103,6 +103,7 @@ def withdraw_test(bank, cash_bin):
     acct_name = "christine0"
     withdraw_amt0 = 200
     withdraw_amt1 = 400
+    withdraw_amt2 = -200
 
     print("\nswiping card...")
     val, message = controller.insert_card(card_number, pin)
@@ -113,7 +114,7 @@ def withdraw_test(bank, cash_bin):
     val, message = controller.select_account(acct_name)
     print(message)
 
-    # withdraw money
+    # withdraw a valid amount of moneymoney
     print("\nwithdrawing " + str(withdraw_amt0) + " dollars...")
     print(cash_bin_to_string(controller))
     val, message = controller.withdraw(withdraw_amt0)
@@ -132,7 +133,16 @@ def withdraw_test(bank, cash_bin):
     val, message = controller.withdraw(withdraw_amt1)
     print(message)
     print(cash_bin_to_string(controller))
-    print_test_result(val)
+    print_test_result(not val)
+
+    # try to withdraw a negative amount
+    print("\nwithdrawing " + str(withdraw_amt2) + " dollars...")
+    controller.cash_bin.set_amount(0)
+    print(cash_bin_to_string(controller))
+    val, message = controller.withdraw(withdraw_amt2)
+    print(message)
+    print(cash_bin_to_string(controller))
+    print_test_result(not val)
 
     # view balance
     val, message = controller.bank.get_balance(card_number, acct_name)
@@ -165,10 +175,25 @@ def account_test(bank, cash_bin):
     print_test_result(val)
     print()
 
+def empty_test():
+    bank = Bank()
+    cash_bin = CashBin()
+    controller = ATMController(bank, cash_bin)
+    
+    card_number = "00000000"
+    pin = "1234"
+    acct_name = "christine0"
+
+    print("\ninserting card...")
+    val, message = controller.insert_card(card_number, pin)
+    print(message)
+    print_test_result(not val)
+    print()
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="add the type of test you wish to run")
-    parser.add_argument('--test_type', default='standard')
+    parser.add_argument('--test_type', default='standard', help='options: standard, pin, withdraw, account, empty, all')
     args = parser.parse_args()
 
     # set up a bank
@@ -214,3 +239,7 @@ if __name__ == "__main__":
     # account test
     elif args.test_type == 'account':
         account_test(bank, cash_bin)
+
+    # empty bank test
+    elif args.test_type == 'empty':
+        empty_test()

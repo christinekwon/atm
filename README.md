@@ -11,9 +11,10 @@ python3 test.py --type standard
 switch up the --type arg to run a specific test
 
 * standard: run the standard insert card / validate pin --> select account --> check balance --> deposit money --> withdraw money sequence
-* pin: test edge cases regarding the pin
-* withdraw: test edge cases regarding withdraw
-* account: test edge cases regarding account selection
+* pin: test wrong pin input
+* withdraw: test withdrawing invalid amounts
+* account: test selecting nonexistent account
+* empty: test swiping on an empty bank
 * all: run all tests
 
 This program is composed of four files:
