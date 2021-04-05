@@ -49,19 +49,6 @@ class Bank:
             else:
                 return self.cards[card_number]['accounts'], "welcome!"
 
-    # update the pin number of a card
-    def update_pin(self, card_number, old_pin, new_pin):
-
-        # check the format of the pin number somewhere here (ie 4 digits)
-
-        if card_number not in self.cards:
-            return 0, "ERROR: invalid card number!"
-        else:
-            if self.cards[card_number]['pin'] != old_pin:
-                return 0, "ERROR: wrong pin number!"
-            else:
-                self.cards[card_number]['pin'] = new_pin
-                return 1, "pin succesfully updated!"
 
     ##### money related methods #####
 
