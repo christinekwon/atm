@@ -4,9 +4,9 @@
 
 git clone https://github.com/christinekwon/atm.git
 
-## Run Program:
+## Run Tests:
 
-python3 demo.py --type standard
+python3 test.py --type standard
 
 switch up the --type arg to run a specific test
 
