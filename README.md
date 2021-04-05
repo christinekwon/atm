@@ -31,12 +31,17 @@ This program is composed of four files:
   * 'value' is 0 if there is an error, and 'message' will specify why
   * for 'get' functions 'value' can be the desired return value, such as an account balance or a list of accounts
   * for functions that do not need to return any specific information, 'value' will be 1 if there is no error
-  
+
 ### ATMController.py: 
 * the controller class, which serves as a mediator between the user and the bank
-* 
+* insert_card method validates card swipe based on the card number and pin number, and returns the associated accounts
+* select_account method allows user to select a specific account based on its name
+* check_balance method returns the balance of the selected account
+* deposit method transfers money in the cash bin to the selected account
+* withdraw method transfers money from the selected account to the cash bin
+
 ### CashBin.py: 
-* a temporary cash bin class that would hold the amount the user wants to deposit, or contain the amount they withdrew
+* a simple cash bin class that holds the amount the user wants to deposit, or contains the amount they withdrew
 
 ### demo.py: 
 * contains the test cases for testing the ATMController
